@@ -10,23 +10,27 @@ def default():
 def fedora_packages ():
     ex ('sudo dnf install ' + \
             ' '.join([
-                'gcc', 'gcc-c++', 'make', 'cmake' ,'automake',
+                'gcc', 'gcc-c++', 'make', 'cmake' ,'automake', 'gvim', 'vim',
                 # Required by YouCompleteMe (vim plugin)
                 'python-devel', 'python3-devel'
                 ]))
 
 def vim ():
-    ex ('cp -r vim ~/.vim')
-    ex ('cp vimrc ~/.vimrc')
+    ex ("rsync -avc ./vim/ ~/.vim")
+    ex ('rsync -avc vimrc ~/.vimrc')
 
     ex ('git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim')
-    ex ('gvim +PluginInstall +qall')
+    ex ('vim +PluginInstall +qall')
     ex ('~/.vim/bundle/YouCompleteMe/install.py')
 
 def bashrc ():
     if ex ('diff bashrc ~/.bashrc') == 1:
         ex ('mv ~/.bashrc ~/.bashrc.bak')
         ex ('cp bashrc ~/.bashrc')
+
+def vim_update ():
+    ex ("rsync -avc --exclude='/bundle' --exclude='/.netrwhist' --exclude='/.VimballRecord' ~/.vim/ ./vim/")
+    ex ('rsync -avc ~/.vimrc ./vimrc')
 
 if __name__ == "__main__":
     if get_cli_option ('--get_deps_pkgs'):

@@ -107,13 +107,17 @@ set spellsuggest=5
 let g:tex_flavor='latex'
 
 " Gui setup (basically removes most of the GUI)
-set guioptions -=T
-set guioptions +=c
-set guioptions -=e
-set guioptions -=r
-set guioptions -=b
-set guioptions -=m
-set guioptions -=L
+if has("gui_running")
+    set guioptions -=T
+    set guioptions +=c
+    set guioptions -=e
+    set guioptions -=r
+    set guioptions -=b
+    set guioptions -=m
+    set guioptions -=L
+endif
+
+set nohlsearch
 
 function! InsertFormat()
     if @% =~ '\.[ch]$'

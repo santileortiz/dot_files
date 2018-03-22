@@ -1,8 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
-let g:netrw_dirhist_1='/home/santiago/.vim'
-let g:netrw_dirhist_2='/home/santiago/.vim/ftplugin'
-let g:netrw_dirhist_3='/home/santiago/OpenGL_sandbox/depth_peeling'
-let g:netrw_dirhist_4='/usr/lib/liftoff'
-let g:netrw_dirhist_5='/usr/lib/liftoff/hooks'
-let g:netrw_dirhist_6='/home/santiago/.gnupg/private-keys-v1.d'
