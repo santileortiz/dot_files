@@ -11,17 +11,17 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " My bundles here:
-"Plugin 'Valloric/YouCompleteMe'
-Plugin 'https://github.com/tpope/vim-surround'
+Plugin 'Valloric/YouCompleteMe'
+"Plugin 'https://github.com/tpope/vim-surround'
 "Plugin 'https://github.com/derekwyatt/vim-fswitch'
-Plugin 'craigemery/vim-autotag'
-Plugin 'joonty/vim-do.git'
+"Plugin 'craigemery/vim-autotag'
+"Plugin 'joonty/vim-do.git'
 Plugin 'tikhomirov/vim-glsl'
 " original repos on GitHub
-"Bundle 'Lokaltog/vim-easymotion'
+Bundle 'Lokaltog/vim-easymotion'
 "" vim-scripts repos
-Plugin 'L9'
-Plugin 'FuzzyFinder'
+"Plugin 'L9'
+"Plugin 'FuzzyFinder'
 call vundle#end()
 filetype plugin indent on     " required!
 
