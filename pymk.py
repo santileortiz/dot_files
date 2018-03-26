@@ -34,6 +34,11 @@ def vim_update ():
     ex ('rsync -avc ~/.vimrc ./vimrc')
 
 def install_keyboard ():
+    layout_file = pathlib.Path('/usr/share/X11/xkb/symbols/santiago')
+    if layout_file.exists():
+        print ('Keyboard layout seems to be already installed')
+        return
+
     def seek_section_start (f):
         line = f.readline ()
         while '{' not in line:
