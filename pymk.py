@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 from mkpy.utility import *
+import textwrap
 assert sys.version_info >= (3,2)
 
 #TODO: Resume installation where we lef off if something goes wrong
@@ -90,29 +91,32 @@ def install_keyboard ():
 
     # Setup the system so it knows about the new layout
     content = """ 
-    <layout>
-      <configItem>
-        <name>santiago</name>
-        <shortDescription>sa</shortDescription>
-        <description>santiago's keyboard layout</description>
-        <languageList>
-          <iso639Id>es</iso639Id>
-        </languageList>
-      </configItem>
-    </layout>
-    """
+              \0<layout>
+              \0  <configItem>
+              \0    <name>santiago</name>
+              \0    <shortDescription>sa</shortDescription>
+              \0    <description>santiago's keyboard layout</description>
+              \0    <languageList>
+              \0      <iso639Id>es</iso639Id>
+              \0    </languageList>
+              \0  </configItem>
+              \0</layout>
+              """
+    content = textwrap.dedent(content).replace('\0', '    ')
     insert_into_file ('/usr/share/X11/xkb/rules/evdev.xml', '<layoutList>', content)
 
-    content = """// Custom Layout
-! layout        =   types
-  santi         =   santi_t
-! layout        =   keycodes
-  santi         =   santi_k
-! layout        =   compat
-  santi         =   santi_c
-! layout        =   symbols
-  santi         =   santi
-"""
+    content = """
+              // Custom Layout
+              ! layout        =   types
+                santi         =   santi_t
+              ! layout        =   keycodes
+                santi         =   santi_k
+              ! layout        =   compat
+                santi         =   santi_c
+              ! layout        =   symbols
+                santi         =   santi
+              """
+    content = textwrap.dedent(content[1:])
     insert_into_file ('/usr/share/X11/xkb/rules/evdev', '// PC models', content, before=True)
 
 if __name__ == "__main__":
