@@ -125,8 +125,9 @@ def install_keyboard ():
     insert_into_file ('/usr/share/X11/xkb/rules/evdev', '// PC models', content, before=True)
 
 if __name__ == "__main__":
-    if get_cli_option ('--get_deps_pkgs'):
-        get_target_dep_pkgs ()
-        exit ()
+    # Everything above this line will be executed for each TAB press.
+    # If --get_completions is set, handle_tab_complete() calls exit().
+    handle_tab_complete ()
+
     pymk_default()
 
