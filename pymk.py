@@ -8,6 +8,14 @@ def default():
     bashrc ()
     vim ()
 
+def elementary_packages ():
+    ex ('sudo apt-get install ' + \
+            ' '.join([
+                'gcc', 'make', 'cmake' ,'automake', 'vim-gnome',
+                # Required by YouCompleteMe (vim plugin)
+                'python2.7-dev'
+                ]))
+
 def fedora_packages ():
     ex ('sudo dnf install ' + \
             ' '.join([
@@ -96,6 +104,7 @@ def install_keyboard ():
 
     # Setup the system so it knows about the new layout
     content = """ 
+              \0<!--CUSTOM LAYOUTS START-->
               \0<layout>
               \0  <configItem>
               \0    <name>santiago</name>
@@ -106,20 +115,23 @@ def install_keyboard ():
               \0    </languageList>
               \0  </configItem>
               \0</layout>
+              \0<!--CUSTOM LAYOUTS END-->
               """
     content = textwrap.dedent(content).replace('\0', '    ')
     insert_into_file ('/usr/share/X11/xkb/rules/evdev.xml', '<layoutList>', content)
 
     content = """
-              // Custom Layout
+              // CUSTOM LAYOUTS START
               ! layout        =   types
-                santi         =   santi_t
+                santiago      =   santiago_t
               ! layout        =   keycodes
-                santi         =   santi_k
+                santiago      =   santiago_k
               ! layout        =   compat
-                santi         =   santi_c
+                santiago      =   santiago_c
               ! layout        =   symbols
-                santi         =   santi
+                santiago      =   santiago
+              // CUSTOM LAYOUTS END
+
               """
     content = textwrap.dedent(content[1:])
     insert_into_file ('/usr/share/X11/xkb/rules/evdev', '// PC models', content, before=True)
