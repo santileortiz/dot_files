@@ -1,3 +1,8 @@
+// Name: santiago
+// Description: US layout with Spanish characters
+// Short description: sa
+// Languages: es, us
+
 xkb_keymap {
 xkb_keycodes "evdev+aliases(qwerty)" {
     minimum = 8;
@@ -864,8 +869,8 @@ xkb_symbols "pc+us+inet(evdev)" {
         symbols[Group1]= [           Print,         Sys_Req ]
     };
     key <RALT> {
-        type= "TWO_LEVEL",
-        symbols[Group1]= [           ISO_Level3_Shift,          Meta_R ]
+        type[Group1]= "ONE_LEVEL",
+        symbols[Group1]= [           ISO_Level3_Shift ]
     };
     key <LNFD> {         [        Linefeed ] };
     key <HOME> {         [            Home ] };
