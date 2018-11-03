@@ -25,9 +25,18 @@ Bundle 'Lokaltog/vim-easymotion'
 call vundle#end()
 filetype plugin indent on     " required!
 
-" Disable backup
+" Disable backup and swap files
 set nobackup
 set nowritebackup
+set noswapfile
+
+"Use persistent undo instead
+"NOTE: This hasn't been tested in Windows
+if !isdirectory($HOME . '/.vim/undodir')
+    silent call mkdir($HOME . '/.vim/undodir', "p")
+endif
+set undodir=.vim/undodir
+set undofile
 
 " set UTF-8 encoding
 set enc=utf-8
