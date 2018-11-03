@@ -770,7 +770,10 @@ xkb_symbols "pc+us+inet(evdev)" {
     };
     key <AB08> {         [           comma,            less ] };
     key <AB09> {         [          period,         greater ] };
-    key <AB10> {         [           slash,        question ] };
+    key <AB10> {
+        type= "FOUR_LEVEL",
+        [           slash,        question,   questiondown,   exclamdown ]
+    };
     key <RTSH> { [         Shift_R] };
     key <KPMU> {
         type= "CTRL+ALT",
