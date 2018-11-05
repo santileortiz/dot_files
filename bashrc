@@ -334,6 +334,12 @@ replace () {
     echo -e $stdout
 }
 
+elementary_files_color () {
+    last_modified=$(stat -c %Y $1)
+    dir=$(realpath "$1")
+    gdbus call -e --dest io.elementary.files.db -o /io/elementary/files/db -m io.elementary.files.db.RecordUris "[<[\"file://$dir\",\"inode/directory\",\"$last_modified\",\"$2\"]>]" file://$dir > /dev/null
+}
+
 # no $2 means copy into $PWD
 lnk_mv () {
     src=$(realpath "$1")
@@ -357,5 +363,16 @@ lnk_mv () {
     else
         mv "$src" "$dest" && ln -s "$dest" "$src"
     fi
+}
+
+# Move $1 into the current directory and color it blue.
+# I use it to move folders out of ~/Dropbox and mark them so I know they're
+# being tracked, hence the name.
+dropbox_mv () {
+    lnk_mv $1
+
+    src=$(realpath "$1")
+    dest=$PWD'/'$(basename "$src")
+    elementary_files_color $dest 5
 }
 
