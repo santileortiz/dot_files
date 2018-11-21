@@ -369,7 +369,7 @@ lnk_mv () {
 # I use it to move folders out of ~/Dropbox and mark them so I know they're
 # being tracked, hence the name.
 dropbox_mv () {
-    lnk_mv $1
+    lnk_mv "$1"
 
     src=$(realpath "$1")
     dest=$PWD'/'$(basename "$src")

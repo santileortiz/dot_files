@@ -41,6 +41,9 @@ def vim_update ():
     ex ("rsync -avc --exclude='/bundle' --exclude='/.netrwhist' --exclude='/.VimballRecord' ~/.vim/ ./vim/")
     ex ('rsync -avc ~/.vimrc ./vimrc')
 
+def bashrc_update ():
+    ex ('rsync -avc ~/.bashrc ./bashrc')
+
 def install_keyboard ():
     layout_file = pathlib.Path('/usr/share/X11/xkb/symbols/santiago')
     if layout_file.exists():
