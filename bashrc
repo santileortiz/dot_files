@@ -335,9 +335,10 @@ replace () {
 }
 
 elementary_files_color () {
-    last_modified=$(stat -c %Y $1)
+    last_modified=$(stat -c %Y "$1")
     dir=$(realpath "$1")
-    gdbus call -e --dest io.elementary.files.db -o /io/elementary/files/db -m io.elementary.files.db.RecordUris "[<[\"file://$dir\",\"inode/directory\",\"$last_modified\",\"$2\"]>]" file://$dir > /dev/null
+    url_enc_dir=$(python -c "import urllib; print urllib.quote('''$dir''')")
+    gdbus call -e --dest io.elementary.files.db -o /io/elementary/files/db -m io.elementary.files.db.RecordUris "[<[\"file://$url_enc_dir\",\"inode/directory\",\"$last_modified\",\"$2\"]>]" "file://$url_enc_dir" > /dev/null
 }
 
 # no $2 means copy into $PWD
