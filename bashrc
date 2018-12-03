@@ -195,6 +195,9 @@ alias emacs="XLIB_SKIP_ARGB_VISUALS=1 emacs"
 # Hace que clear borre la salida de verdad
 alias clear="clear;clear"
 
+#Use a global exclude file for cloc
+alias cloc='cloc --exclude-list-file=$HOME/.cloc_exclude'
+
 export PATH=$PATH:/home/santiago/Downloads/go/bin
 export PATH=/usr/local/cuda-8.0/bin${PATH:+:${PATH}}
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64"
