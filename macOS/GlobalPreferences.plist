@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ADATA USB Flash Drive</key>
+	<string>1</string>
+	<key>AKLastIDMSEnvironment</key>
+	<integer>0</integer>
+	<key>AppleActionOnDoubleClick</key>
+	<string>Maximize</string>
+	<key>AppleAntiAliasingThreshold</key>
+	<integer>4</integer>
+	<key>AppleInterfaceStyle</key>
+	<string>Dark</string>
+	<key>AppleLanguages</key>
+	<array>
+		<string>en-MX</string>
+		<string>en</string>
+	</array>
+	<key>AppleLanguagesDidMigrate</key>
+	<string>10.14.3</string>
+	<key>AppleLocale</key>
+	<string>en_MX</string>
+	<key>AppleMiniaturizeOnDoubleClick</key>
+	<false/>
+	<key>ApplePressAndHoldEnabled</key>
+	<string>0</string>
+	<key>Belkin USB-C LAN</key>
+	<string>1</string>
+	<key>Kingston DataTraveler 3.0</key>
+	<string>1</string>
+	<key>NSAutomaticCapitalizationEnabled</key>
+	<true/>
+	<key>NSAutomaticDashSubstitutionEnabled</key>
+	<true/>
+	<key>NSAutomaticPeriodSubstitutionEnabled</key>
+	<true/>
+	<key>NSAutomaticQuoteSubstitutionEnabled</key>
+	<true/>
+	<key>NSAutomaticSpellingCorrectionEnabled</key>
+	<true/>
+	<key>NSAutomaticTextCompletionEnabled</key>
+	<true/>
+	<key>NSLinguisticDataAssetsRequestTime</key>
+	<date>2019-02-21T14:58:12Z</date>
+	<key>NSLinguisticDataAssetsRequested</key>
+	<array>
+		<string>en</string>
+		<string>en_MX</string>
+		<string>es</string>
+		<string>en_US</string>
+	</array>
+	<key>NSNavRecentPlaces</key>
+	<array>
+		<string>~/OSX_conf</string>
+		<string>~/development/products/perspectives-8.3.0/cloud-native/dbbrowser/webapp</string>
+		<string>~/development/products/perspectives-8.3.0/cloud-native/dbbrowser/providers/RDF</string>
+		<string>~/development/products/perspectives-8.3.0/cloud-native</string>
+		<string>~/development/products/lib/maven/conf</string>
+	</array>
+	<key>NSPreferredWebServices</key>
+	<dict>
+		<key>NSWebServicesProviderWebSearch</key>
+		<dict>
+			<key>NSDefaultDisplayName</key>
+			<string>Google</string>
+			<key>NSProviderIdentifier</key>
+			<string>com.google.www</string>
+		</dict>
+	</dict>
+	<key>NSUserDictionaryReplacementItems</key>
+	<array>
+		<dict>
+			<key>on</key>
+			<integer>1</integer>
+			<key>replace</key>
+			<string>omw</string>
+			<key>with</key>
+			<string>On my way!</string>
+		</dict>
+	</array>
+	<key>NSUserKeyEquivalents</key>
+	<dict>
+		<key>Close Window</key>
+		<string>~</string>
+		<key>Copy</key>
+		<string>^c</string>
+		<key>Cut</key>
+		<string>^x</string>
+		<key>Find...</key>
+		<string>^f</string>
+		<key>New Incognito Window</key>
+		<string>^$n</string>
+		<key>New Tab</key>
+		<string>^t</string>
+		<key>Paste</key>
+		<string>^v</string>
+		<key>Redo</key>
+		<string>^$z</string>
+		<key>Reopen Closed Tab</key>
+		<string>^$t</string>
+		<key>Undo</key>
+		<string>^z</string>
+	</dict>
+	<key>VIA Technologies Inc. USB 2.0 BILLBOARD</key>
+	<string>1</string>
+	<key>WebAutomaticSpellingCorrectionEnabled</key>
+	<true/>
+	<key>com.apple.finder.SyncExtensions</key>
+	<dict>
+		<key>dirMap</key>
+		<dict/>
+	</dict>
+	<key>com.apple.keyboard.fnState</key>
+	<true/>
+	<key>com.apple.mouse.scaling</key>
+	<real>3</real>
+	<key>com.apple.sound.beep.flash</key>
+	<integer>0</integer>
+	<key>com.apple.springing.delay</key>
+	<real>0.5</real>
+	<key>com.apple.springing.enabled</key>
+	<true/>
+	<key>com.apple.swipescrolldirection</key>
+	<false/>
+	<key>com.apple.trackpad.forceClick</key>
+	<true/>
+</dict>
+</plist>
