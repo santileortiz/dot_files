@@ -1,9 +1,7 @@
-syntax match cNote contained  "NOTE:"
-syntax cluster cCommentGroup    add=cNote
-highlight def link cNote        Note
+call DefineCustomSyntaxCommentAnnotations()
 
 syntax clear cTodo
-syntax match cTodo contained "TODO:"
-syntax match cFixme contained "\(FIXME\|XXX\):"
-syntax cluster	cCommentGroup	add=cFixme
-highlight def link cFixme		Fixme
+syntax cluster cCommentGroup    add=customTodo
+syntax cluster cCommentGroup    add=customNote
+syntax cluster cCommentGroup	add=customFixme
+syntax cluster cCommentGroup	add=customCaution

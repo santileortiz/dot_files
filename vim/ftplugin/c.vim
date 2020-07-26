@@ -22,6 +22,8 @@ set cino=(0,W1s,m1
 
 " highlight matching braces
 setlocal showmatch
+" This avoids % matching { inside comments (Why is this not the default?!?!)
+runtime macros/matchit.vim
 " intelligent comments
 setlocal comments=sl:/*,mb:\ *,elx:\ */
 
@@ -79,4 +81,15 @@ endfunction
 
 nnoremap <buffer> <A-]> :call OpenTagInVSplit(0)<CR>
 nnoremap <buffer> <A-}> :call OpenTagInVSplit(1)<CR>
+
+" Fast way to delete a full C identifier, including all .'s and ->'s
+" I tried changing iskeyword permanently but * and # are more useful having
+" the default iskeyword.
+function! DeleteFullCIdeintifier()
+    let backup_iskeyword = &iskeyword
+    set iskeyword=a-z,A-Z,48-57,_,.,-,>
+    normal diw
+    let &iskeyword=backup_iskeyword
+endfunction
+nnoremap dic :call DeleteFullCIdeintifier()<CR>
 

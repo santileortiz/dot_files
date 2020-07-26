@@ -30,6 +30,10 @@ set nobackup
 set nowritebackup
 set noswapfile
 
+" Disable wrapping
+set nowrap
+set sidescroll=1
+
 "Use persistent undo instead
 "NOTE: This hasn't been tested in Windows
 if !isdirectory($HOME . '/.vim/undodir')
@@ -50,7 +54,7 @@ set smartcase
 
 " Enable 256 color mode
 set t_Co=256
-colorscheme santi_xoria256
+colorscheme custom_xoria256
 syntax on
 set number
 
@@ -128,6 +132,7 @@ endif
 
 set nohlsearch
 
+" Add copyright header to .c and .h files
 function! InsertFormat()
     if @% =~ '\.[ch]$'
         0r ~/.vim/c_templ.c
@@ -145,3 +150,19 @@ endfunction
 
 autocmd bufNewFile *.c,*.h call InsertFormat()
 
+" Function used to define custom comment annotation syntax that supports
+" labels inside parenthesis. Useful so people can add their names to
+" annotations.
+function! DefineCustomSyntaxCommentAnnotations()
+    syn case ignore
+    syn match   customTodo    contained "TODO\(([a-z0-9\ ]*)\)\?\(:\)\?"
+    syn match   customFixme   contained "\(FIXME\|XXX\)\(([a-z0-9\ ]*)\)\?\(:\)\?"
+    syn match   customNote    contained "NOTE\(([a-z0-9\ ]*)\)\?\(:\)\?"
+    syn match   customCaution contained "CAUTION\(([a-z0-9\ ]*)\)\?\(:\)\?"
+    syn case match
+
+    highlight link customTodo            Todo
+    highlight link customFixme           Fixme
+    highlight link customNote            Note
+    highlight link customCaution         Caution
+endfunction
