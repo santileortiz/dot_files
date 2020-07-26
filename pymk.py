@@ -39,7 +39,7 @@ def bashrc ():
         ex ('cp cloc_exclude ~/.cloc_exclude')
 
 def vim_update ():
-    ex ("rsync -avc --exclude='/bundle' --exclude='/.netrwhist' --exclude='/.VimballRecord' ~/.vim/ ./vim/")
+    ex ("rsync -avc --exclude='/bundle' --exclude='/undodir' --exclude='/.netrwhist' --exclude='/.VimballRecord' ~/.vim/ ./vim/")
     ex ('rsync -avc ~/.vimrc ./vimrc')
 
 def bashrc_update ():
