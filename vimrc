@@ -132,6 +132,10 @@ endif
 
 set nohlsearch
 
+" Allow per project .vimrc
+set exrc
+set secure
+
 " Add copyright header to .c and .h files
 function! InsertFormat()
     if @% =~ '\.[ch]$'
@@ -155,10 +159,10 @@ autocmd bufNewFile *.c,*.h call InsertFormat()
 " annotations.
 function! DefineCustomSyntaxCommentAnnotations()
     syn case ignore
-    syn match   customTodo    contained "TODO\(([a-z0-9\ ]*)\)\?\(:\)\?"
-    syn match   customFixme   contained "\(FIXME\|XXX\)\(([a-z0-9\ ]*)\)\?\(:\)\?"
-    syn match   customNote    contained "NOTE\(([a-z0-9\ ]*)\)\?\(:\)\?"
-    syn match   customCaution contained "CAUTION\(([a-z0-9\ ]*)\)\?\(:\)\?"
+    syn match   customTodo    contained "TODO\(([a-z0-9\ ]*)\)\?:"
+    syn match   customFixme   contained "\(FIXME\|XXX\)\(([a-z0-9\ ]*)\)\?:"
+    syn match   customNote    contained "NOTE\(([a-z0-9\ ]*)\)\?:"
+    syn match   customCaution contained "CAUTION\(([a-z0-9\ ]*)\)\?:"
     syn case match
 
     highlight link customTodo            Todo
