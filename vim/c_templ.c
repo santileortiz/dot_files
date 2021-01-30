@@ -1,3 +1,3 @@
 /*
- * Copiright (C) <YEAR> Santiago León O.
+ * Copyright (C) <YEAR> Santiago León O.
  */
