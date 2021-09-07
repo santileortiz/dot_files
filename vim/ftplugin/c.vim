@@ -1,4 +1,6 @@
-" use intelligent indentation for C
+" Configure C indentation
+set autoindent
+set cindent
 setlocal smartindent
 setlocal textwidth=80
 

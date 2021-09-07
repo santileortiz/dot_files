@@ -59,12 +59,9 @@ syntax on
 set number
 
 " Indentation configuration
-set autoindent 
-set cindent 
 set tabstop=4 
 set shiftwidth=4 
 set expandtab
-set cino+=(0
 
 " Paragraph navigation with Space
 noremap <Space> }
