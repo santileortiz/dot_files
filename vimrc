@@ -25,6 +25,11 @@ Bundle 'Lokaltog/vim-easymotion'
 call vundle#end()
 filetype plugin indent on     " required!
 
+" Disable YouCompleteMe's autohover (see https://www.reddit.com/r/vim/comments/g9v832/ycm_documentation_hover_should_we_enable_it_by/)
+" I see why making it visible was a good intent, but I find it quite annoying
+" and obstrusive. (TODO: Maybe add a keybinding for this?)
+let g:ycm_auto_hover=''
+
 " Disable backup and swap files
 set nobackup
 set nowritebackup
