@@ -146,6 +146,21 @@ def install_keyboard ():
     content = textwrap.dedent(content[1:])
     insert_into_file ('/usr/share/X11/xkb/rules/evdev', '// PC models', content, before=True)
 
+
+#######
+# macOS
+
+def macos_install_keyboard():
+    target = "~/Library/Keyboard\ Layouts/"
+
+    ex (f"cp macOS/Santiago_apple.bundle/Contents/Resources/Santiago.keylayout {target}")
+    ex (f"cp macOS/Santiago_apple.bundle/Contents/Resources/Santiago.icns {target}")
+
+    print()
+    print ('Go to Settings > Keyboard > Input Sources, click on + to add new. The new layout will be under "Other".')
+
+
+
 if __name__ == "__main__":
     # Everything above this line will be executed for each TAB press.
     # If --get_completions is set, handle_tab_complete() calls exit().
