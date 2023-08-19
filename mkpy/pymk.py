@@ -3,12 +3,22 @@
 _pymk()
 {
     local cur prev words cword
-    _init_completion || return
+
+    if [[ $OSTYPE == 'darwin'* ]]; then
+        #  FIXME: Why is there no _init_completion in Brew's bash_complete?
+        COMPREPLY=()
+        _get_comp_words_by_ref cur prev words cword
+    else
+        _init_completion || return
+    fi
 
     res="$(./pymk.py --get_completions "$COMP_POINT $COMP_LINE")"
-    COMPREPLY=( $( compgen -W '$res' -- "$cur" ) )
-    [[ $COMPREPLY ]] || \
-        COMPREPLY=( $( compgen -f -- "$cur" ) )
+    completions=( $(compgen -W '$res' -- "$cur") )
+    if [[ $completions ]]; then
+        COMPREPLY=("${completions[@]}")
+    else
+        _filedir
+    fi
 } &&
 complete -F _pymk "./pymk.py"
 
