@@ -65,6 +65,12 @@ require('lazy').setup({
       -- Adds LSP completion capabilities
       'hrsh7th/cmp-nvim-lsp',
 
+      -- Omni complete
+      'hrsh7th/cmp-omni',
+
+      -- Buffer word complete
+      'hrsh7th/cmp-buffer',
+
       -- Adds a number of user-friendly snippets
       'rafamadriz/friendly-snippets',
     },
@@ -99,10 +105,9 @@ require('lazy').setup({
         changedelete = { text = '~' },
       },
       on_attach = function(bufnr)
-        vim.keymap.set('n', '<leader>gp', require('gitsigns').prev_hunk,
-          { buffer = bufnr, desc = '[G]o to [P]revious Hunk' })
+        vim.keymap.set('n', '<leader>gp', require('gitsigns').prev_hunk, { buffer = bufnr, desc = '[G]o to [P]revious Hunk' })
         vim.keymap.set('n', '<leader>gn', require('gitsigns').next_hunk, { buffer = bufnr, desc = '[G]o to [N]ext Hunk' })
-        vim.keymap.set('n', '<leader>ph', require('gitsigns').preview_hunk, { buffer = bufnr, desc = '[P]review [H]unk' })
+        --vim.keymap.set('n', '<leader>ph', require('gitsigns').preview_hunk, { buffer = bufnr, desc = '[P]review [H]unk' })
       end,
     },
   },
@@ -169,8 +174,7 @@ require('lazy').setup({
     build = ':TSUpdate',
   },
 
-  -- These are example plugins that came with kickstart.nvim
-  require 'kickstart.plugins.autoformat',
+  -- Example plugins that came with kickstart.nvim
   require 'kickstart.plugins.debug',
 
   -- Location for cuatom plugins
@@ -182,7 +186,7 @@ require('lazy').setup({
 -- See `:help vim.o`
 
 -- Show line numbers
-vim.wo.number = true
+vim.o.number = true
 
 -- Confirm instead of error
 vim.o.confirm = true
@@ -199,7 +203,7 @@ vim.o.splitright = true
 vim.o.mouse = 'a'
 
 -- Clipboard
-vim.o.clipboard = 'unnamed'
+vim.o.clipboard = 'unnamedplus'
 
 -- Search
 vim.o.incsearch = true
@@ -214,9 +218,14 @@ vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = false
 vim.o.cino = "+=(0"
+vim.o.wrap = false
 
 -- Scroll before endof screen
 vim.o.scrolloff = 8
+
+-- Visible Spaces
+vim.o.list = true
+vim.o.listchars = "tab:──┤,trail:·"
 
 
 -- [[ Setting Options Neovim ]]
@@ -225,7 +234,7 @@ vim.o.scrolloff = 8
 vim.o.undofile = true
 
 -- Decrease update time
-vim.o.updatetime = 80
+vim.o.updatetime = 50
 vim.o.timeoutlen = 200
 
 -- Enable break indent
@@ -299,9 +308,11 @@ vim.keymap.set('n', '<leader>mc', ':Git mergetool<CR>', { desc = '[M]erge Qui[c]
 vim.keymap.set('n', '<leader>mm', '<C-w><C-o>:Gvdiffsplit!<CR>', { desc = '[M]erge Split' })
 vim.keymap.set('n', '<leader>mb', ':Ghdiffsplit<CR>:resize 10<CR><C-w><C-w>', { desc = '[M]erge Split [B]ase' })
 
--- Review staged changes
+-- Populate quickfix with staged changes
 vim.keymap.set('n', '<leader>dc', ':Git difftool --cached<CR><C-w><C-o>', { desc = '[D]iff Qui[c]k List' })
-vim.keymap.set('n', '<leader>dd', '<C-w><C-o>:Gvdiff HEAD<CR>zR<C-w>hzR<C-w>L', { desc = '[D]iff Split' })
+
+vim.keymap.set('n', '<leader>dd', ':Gvdiff HEAD<CR>zR<C-w>hzR<C-w>L', { desc = '[D]iff Open' })
+vim.keymap.set('n', '<leader>dx', 'mX<C-w>h:q<CR>`X', { desc = '[D]iff E[x]it' })
 
 -- Restore from diff
 vim.keymap.set('n', '<leader>dg', ':diffget<CR>', { desc = '[D]iff [G]et' })
@@ -324,103 +335,6 @@ local function clipboard_diff()
 end
 vim.keymap.set('n', '<leader>dp', clipboard_diff, { desc = '[D]iff [P]aste' })
 
--- [[ Keymaps macOS ]]
--- macOS specific because I can't have Ctrl in caps lock and I instead have cmd (⌘) there
-
--- Chunk Scrolling
-vim.keymap.set({ 'n', 'v' }, '<D-j>', '}', { silent = true })
-vim.keymap.set({ 'n', 'v' }, '<D-k>', '{', { silent = true })
-
-vim.keymap.set('n', '<D-v>', '<C-v>', { silent = true })
-vim.keymap.set('n', '<D-r>', '<C-r>', { silent = true })
-
-vim.keymap.set('n', '<D-a>', '<C-a>', { silent = true })
-vim.keymap.set('n', '<D-x>', '<C-x>', { silent = true })
-
-vim.keymap.set('n', '<D-o>', '<C-o>', { silent = true })
-vim.keymap.set('n', '<D-t>', '<C-t>', { silent = true })
-
-vim.keymap.set('n', '<D-u>', '<C-u>', { silent = true })
-vim.keymap.set('n', '<D-d>', '<C-d>', { silent = true })
-vim.keymap.set('n', '<D-b>', '<C-b>', { silent = true })
-vim.keymap.set('n', '<D-f>', '<C-f>', { silent = true })
-
-vim.keymap.set('n', '<D-w><D-w>', '<C-w><C-w>', { silent = true })
-vim.keymap.set('n', '<D-w><D-o>', '<C-w><C-o>', { silent = true })
-vim.keymap.set('n', '<D-w><up>', '<C-w><up>', { silent = true })
-vim.keymap.set('n', '<D-w><down>', '<C-w><down>', { silent = true })
-vim.keymap.set('n', '<D-w><left>', '<C-w><left>', { silent = true })
-vim.keymap.set('n', '<D-w><right>', '<C-w><right>', { silent = true })
-vim.keymap.set('n', '<D-w>T', '<C-w>T', { silent = true })
-vim.keymap.set('n', '<D-w>o', '<C-w>o', { silent = true })
-vim.keymap.set('n', '<D-w>n', '<C-w>n', { silent = true })
-vim.keymap.set('n', '<D-w>c', '<C-w>c', { silent = true })
-vim.keymap.set('n', '<D-w>s', '<C-w>s', { silent = true })
-vim.keymap.set('n', '<D-w>v', '<C-w>v', { silent = true })
-vim.keymap.set('n', '<D-w>m', '<C-w>m', { silent = true })
-vim.keymap.set('n', '<D-w>o', '<C-w>o', { silent = true })
-vim.keymap.set('n', '<D-w>r', '<C-w>r', { silent = true })
-vim.keymap.set('n', '<D-w>R', '<C-w>R', { silent = true })
-vim.keymap.set('n', '<D-w>H', '<C-w>H', { silent = true })
-vim.keymap.set('n', '<D-w>h', '<C-w>h', { silent = true })
-vim.keymap.set('n', '<D-w>J', '<C-w>J', { silent = true })
-vim.keymap.set('n', '<D-w>j', '<C-w>j', { silent = true })
-vim.keymap.set('n', '<D-w>K', '<C-w>K', { silent = true })
-vim.keymap.set('n', '<D-w>k', '<C-w>k', { silent = true })
-vim.keymap.set('n', '<D-w>L', '<C-w>L', { silent = true })
-vim.keymap.set('n', '<D-w>l', '<C-w>l', { silent = true })
-vim.keymap.set('n', '<D-w>_', '<C-w>_', { silent = true })
-vim.keymap.set('n', '<D-w>|', '<C-w>|', { silent = true })
-vim.keymap.set('n', '<D-w>=', '<C-w>=', { silent = true })
-
-vim.keymap.set({ 'i', 'c' }, '<D-w>', '<C-w>')
-
--- Register paste in insert/command modes
--- Just doing
---   vim.keymap.set('c', '<D-r>', '<C-r>')
--- breaks the following:
---  - which-key stops showing on Insert mode
---  - In command mode it breaks the explicit binding of <D-r><D-w> to <C-r><C-w>, which is
---    necessary because the remapping of <C-w> doesn't apply here (why?...).
-vim.keymap.set('c', '<D-r><D-w>', '<C-r><C-w>')
-vim.keymap.set({ 'i', 'c' }, '<D-r>*', '<C-r>*')
-vim.keymap.set({ 'i', 'c' }, '<D-r>+', '<C-r>+')
-vim.keymap.set({ 'i', 'c' }, '<D-r>"', '<C-r>*')
-vim.keymap.set({ 'i', 'c' }, '<D-r>-', '<C-r>-')
-vim.keymap.set({ 'i', 'c' }, '<D-r>.', '<C-r>.')
-vim.keymap.set({ 'i', 'c' }, '<D-r>%', '<C-r>%')
-vim.keymap.set({ 'i', 'c' }, '<D-r>/', '<C-r>/')
-vim.keymap.set({ 'i', 'c' }, '<D-r>q', '<C-r>q')
-vim.keymap.set({ 'i', 'c' }, '<D-r>0', '<C-r>0')
-vim.keymap.set({ 'i', 'c' }, '<D-r>1', '<C-r>1')
-vim.keymap.set({ 'i', 'c' }, '<D-r>2', '<C-r>2')
-vim.keymap.set({ 'i', 'c' }, '<D-r>3', '<C-r>3')
-vim.keymap.set({ 'i', 'c' }, '<D-r>4', '<C-r>4')
-vim.keymap.set({ 'i', 'c' }, '<D-r>5', '<C-r>5')
-vim.keymap.set({ 'i', 'c' }, '<D-r>6', '<C-r>6')
-vim.keymap.set({ 'i', 'c' }, '<D-r>7', '<C-r>7')
-vim.keymap.set({ 'i', 'c' }, '<D-r>8', '<C-r>8')
-
-vim.keymap.set('c', '<D-c><D-c>', '<C-c><C-c>', { silent = true })
-vim.keymap.set('c', '<D-c>', '<C-c>', { silent = true })
-
-vim.keymap.set('c', '<D-n>', '<C-n>')
-vim.keymap.set('c', '<D-p>', '<C-p>')
-
--- Remap <C-w>- but keep count
-vim.keymap.set("n", "<D-w>-", function()
-  return "<cmd>resize -" .. vim.v.count1 .. "<cr>"
-end, { expr = true })
-
--- Remap <C-w>+ but keep count
-vim.keymap.set("n", "<D-w>+", function()
-  return "<cmd>resize +" .. vim.v.count1 .. "<cr>"
-end, { expr = true })
-
--- TODO: These also recive a count, how can it be forwarded?
-vim.keymap.set('n', '<D-w>>', '<C-w>>', { silent = true })
-vim.keymap.set('n', '<D-w><', '<C-w><', { silent = true })
-
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -432,6 +346,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = highlight_group,
   pattern = '*',
 })
+
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
@@ -481,7 +396,7 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim', 'java' },
+  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'java' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
@@ -578,7 +493,8 @@ local on_attach = function(_, bufnr)
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  -- TODO: Disabled because it conflicts with current chunked navigation, what is this useful for?.
+  -- nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -600,7 +516,7 @@ end
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
-  clangd = {},
+  -- clangd = {}, -- Doesn't support unity builds (see https://github.com/clangd/clangd/issues/45)
   -- gopls = {},
   pyright = {},
   -- rust_analyzer = {},
@@ -639,12 +555,83 @@ mason_lspconfig.setup_handlers {
   end,
 }
 
--- [[ Configure nvim-cmp ]]
--- See `:help cmp`
-local cmp = require 'cmp'
+-- Resolves a string into a sequence of keycodes that can be passed to
+-- nvim_feedkeys()
+local function rslv(str)
+  return vim.api.nvim_replace_termcodes(str, true, false, true)
+end
+
+-- [[ Snippets ]]
 local luasnip = require 'luasnip'
 require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
+
+-- TODO(sleon): Add my C prf -> printf("<++>", <++>) snippet
+
+-- TODO(sleon): This doesn't handle the case where the cursor in insert mode is
+-- already at the start of a placeholder. It will skip that first placeholder.
+local function jump_placeholder_is(direction)
+  if luasnip.locally_jumpable(direction) then
+    luasnip.jump(direction)
+  else
+    local search_reg = vim.fn.getreginfo('/')
+    local ph_start = '<+'
+    local ph_end = '+>'
+
+    local mvmt = ''
+    if vim.fn.mode() ~= 's' then
+      mvmt = 'l'
+    end
+
+    local search_flags = "";
+    if direction == -1 then
+      search_flags = "b"
+    end
+    if vim.fn.search('\\V' .. ph_start .. '\\_.\\{-}' .. ph_end, search_flags) == 0 then
+      -- TODO(sleon): Would be nicer to show an error message in the status bar here.
+      return -1
+    end
+
+    vim.api.nvim_feedkeys(rslv("<esc>" .. mvmt .. "v/") .. ph_end .. rslv("/e<CR>o<C-g><C-r>_"), 'm', true)
+
+    -- TODO(sleon): For some reason this doesn't work, we always loose the last
+    -- search pattern... it becomes ph_end
+    vim.fn.histdel("search", -1)
+    vim.fn.setreg('/', search_reg)
+  end
+end
+
+local function jump_next_placeholder_is()
+  jump_placeholder_is(1)
+end
+vim.keymap.set({'i', 's'}, '<C-t>', jump_next_placeholder_is)
+
+local function jump_prev_placeholder_is()
+  jump_placeholder_is(-1)
+end
+vim.keymap.set({'i', 's'}, '<C-h>', jump_prev_placeholder_is)
+
+local function jump_placeholder_n(direction)
+  vim.cmd('startinsert')
+  if jump_placeholder_is(direction) == -1 then
+    vim.api.nvim_feedkeys(rslv("<esc>"), 't', true)
+  end
+end
+
+local function jump_next_placeholder_n()
+  jump_placeholder_n(1)
+end
+vim.keymap.set('n', '<C-t>', jump_next_placeholder_n)
+
+local function jump_prev_placeholder_n()
+  jump_placeholder_n(-1)
+end
+vim.keymap.set('n', '<C-h>', jump_prev_placeholder_n)
+
+
+-- [[ Configure nvim-cmp ]]
+-- See `:help cmp`
+local cmp = require 'cmp'
 
 cmp.setup {
   snippet = {
@@ -665,8 +652,6 @@ cmp.setup {
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      elseif luasnip.expand_or_locally_jumpable() then
-        luasnip.expand_or_jump()
       else
         fallback()
       end
@@ -674,8 +659,6 @@ cmp.setup {
     ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif luasnip.locally_jumpable(-1) then
-        luasnip.jump(-1)
       else
         fallback()
       end
@@ -684,49 +667,17 @@ cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
+    {
+      name = 'omni',
+      option = {
+        disable_omnifuncs = { 'v:lua.vim.lsp.omnifunc' }
+      }
+    },
+    { name = 'buffer' }
   },
 }
 
+pcall(require, 'psplx')
+
 -- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
--- vim: ts=2 sts=2 sw=2 et
 -- vim: ts=2 sts=2 sw=2 et
