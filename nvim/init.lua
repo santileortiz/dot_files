@@ -311,8 +311,8 @@ vim.keymap.set('n', '<leader>mb', ':Ghdiffsplit<CR>:resize 10<CR><C-w><C-w>', { 
 -- Populate quickfix with staged changes
 vim.keymap.set('n', '<leader>dc', ':Git difftool --cached<CR><C-w><C-o>', { desc = '[D]iff Qui[c]k List' })
 
-vim.keymap.set('n', '<leader>dd', ':Gvdiff HEAD<CR>zR<C-w>hzR<C-w>L', { desc = '[D]iff Open' })
-vim.keymap.set('n', '<leader>dx', 'mX<C-w>h:q<CR>`X', { desc = '[D]iff E[x]it' })
+vim.keymap.set('n', '<leader>dd', ':Gvdiff HEAD<CR>zR<C-w>hzR<C-w>x<C-w>l', { desc = '[D]iff Open' })
+vim.keymap.set('n', '<leader>dq', '<C-w>h:q<CR><C-w>p', { desc = '[D]iff [Q]uit' })
 
 -- Restore from diff
 vim.keymap.set('n', '<leader>dg', ':diffget<CR>', { desc = '[D]iff [G]et' })
